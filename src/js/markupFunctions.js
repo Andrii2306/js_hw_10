@@ -1,9 +1,10 @@
-import { countryList, countryInfo } from './js/searchCountries';
+import { countryList, countryInfo } from './refs';
 
 export function emptyMarkup() {
   countryList.innerHTML = '';
   countryInfo.innerHTML = '';
 }
+
 export function renderCountriesListMarkup(countries) {
   //console.log('it is countries inside renderCountriesListMarkup(): ', countries);
   const shortMarkup = countries.reduce(
@@ -17,10 +18,21 @@ export function renderCountriesListMarkup(countries) {
   );
   return shortMarkup;
 }
+
 export function renderFullInfoMarkup(countries) {
   const singleMarkup = (
     { name, capital, flags, population, languages } = countries[0]
   ) => {
+    // console.log('name : ', name); console.log('capital : ', capital);
+    // console.log('flags : ', flags);
+    // console.log('population : ', population);
+    // console.log('languages : ', languages);
+
+    //  ===== розпаковуємо усі мови з об'єкта languages: ======
+    // цей вираз відразу додано в розмітку нижче
+    // const allLanguages = Object.values(languages).join(', ');
+    // console.log("Languages in this country: ", allLanguages);
+
     const fullCountryInfoMarkup = `<div class="country-card">
             <div class="flag-and-name">
                 <img class="flag" src="${flags.svg}" alt="${
@@ -48,7 +60,9 @@ export function renderFullInfoMarkup(countries) {
             </ul>
         </div>`;
     //console.log('fullCountryInfoMarkup : ', fullCountryInfoMarkup);
+
     return fullCountryInfoMarkup;
   };
+
   return singleMarkup();
 }

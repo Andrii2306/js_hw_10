@@ -1,17 +1,23 @@
-import './css/styles.css';
+// HBS
+// npm install --save-dev parcel-transformer-hbs
+// ====== add to parcel:
+//  "transformers": {
+//     "*.hbs": [
+//         "parcel-transformer-hbs"
+//       ]
+//     }
+// import markup from './templates/markup.hbs';
 
-npm install --save-dev parcel-transformer-hbs
-====== add to parcel:
- "transformers": {
-    "*.hbs": [
-        "parcel-transformer-hbs"
-      ]
-    }
-===== import markup from './templates/markup.hbs';
+// npm i notiflix
+// npm i --save lodash.debounce
+const debounce = require('lodash.debounce');
+
+import './css/styles.css';
 import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce';
+
 import { searchFormInput, countryList, countryInfo } from './js/refs';
-import { searchCountries } from './js/searchCountries';
+import { fetchCountries } from './js/fetchCountries';
 import {
   emptyMarkup,
   renderCountriesListMarkup,
@@ -24,13 +30,15 @@ searchFormInput.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 function onSearch(event) {
   event.preventDefault();
+
   const name = document.querySelector('input#search-box').value.trim();
+
   if (name === '') {
     emptyMarkup();
     return;
   }
 
-  searchCountries(name)
+  fetchCountries(name)
     .then(countries => {
       //console.log("Number of matches by request : ", countries.length);
       let markup = '';
