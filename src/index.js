@@ -15,7 +15,6 @@ const debounce = require('lodash.debounce');
 import './css/styles.css';
 import Notiflix from 'notiflix';
 import debounce from 'lodash.debounce';
-
 import { searchFormInput, countryList, countryInfo } from './js/refs';
 import { fetchCountries } from './js/fetchCountries';
 import {
