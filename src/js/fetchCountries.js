@@ -1,13 +1,9 @@
-//`https://restcountries.com/v3.1/${name}?fields=capital,population,flags,languages`
-
-//import {countryList, countryInfo} from "./refs";
-
-import { emptyMarkup } from './markupFunctions'; //  рендер пустої розмітки
+import { emptyMarkup } from './markupFunctions';
 import Notiflix from 'notiflix';
 
 const URL = 'https://restcountries.com/v3.1/name';
 
-export function fetchCountries(name) {
+function fetchCountries(name) {
   return fetch(`${URL}/${name}?fields=name,capital,population,flags,languages`)
     .then(response => {
       if (!response.ok || response.status === 404) {
@@ -23,3 +19,5 @@ export function fetchCountries(name) {
       console.log(error);
     });
 }
+
+export { fetchCountries };
